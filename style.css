@@ -241,7 +241,7 @@ input[type="checkbox"]:checked::before {
     background-color: #ffffff; /* Optional: Add a background color */
 }
 
-.delete-task-btn {
+/* .delete-task-btn {
     height: 1.5rem;
     width: 3.5rem;
     font-size: 0.9rem;
@@ -254,7 +254,7 @@ input[type="checkbox"]:checked::before {
 
 .delete-task-btn:hover {
     background-color: rgb(157, 173, 175);
-}
+} */
 
 
 
