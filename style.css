@@ -12,12 +12,13 @@ body {
     margin-top: 50px;
     display: flex;
     align-items: center;
-    width: 79%;
-    height: 40px;
+    width: 70%;
+    height: 50px;
     border: 2px solid #ccc;
-    border-radius: 10px;
-    padding: 5px;
+    border-radius: 25px;
+    padding: 0 15px;
     background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 .search-icon {
@@ -37,15 +38,24 @@ body {
 .items-container {
     margin-top: 30px;
     width: 80%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
 }
 
 .category {
-    margin-bottom: 20px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
 .category h3 {
     margin: 10px 0;
-    color: #333;
+    margin-left: 10px;
+    color: #444; /* Slightly darker heading color */
+    font-size: 1.1em;
+    font-weight: 600;
 }
 
 .item-list {
@@ -55,13 +65,15 @@ body {
 }
 
 .search-item {
-    padding: 10px 15px;
-    border: 1px solid #ccc;
-    border: none;
+    padding: 30px 15px;
+    border: 1px solid #dfe3e6; /* Light border color */
+    border-radius: 5px;
     font-size: 0.9em;
     text-align: left;
+    background-color: #ffffff; /* White background for items */
+    color: #555; /* Neutral text color */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
 }
-
 
 /* to-do css */
 
@@ -69,8 +81,6 @@ body {
     --gradient: red;
     
 }
-
-
 
 body{
     margin: 0;
@@ -95,7 +105,7 @@ body{
 } */
 
 .btn{
-    height: 1.5rem;
+    height: 2 rem;
     width: 3rem;
     font-size: 0.9rem;
     border-radius: 5px;
@@ -194,7 +204,7 @@ input[type="checkbox"]:checked::before {
     border: 0.06rem solid gray;
     border-radius: 50%;
     color: rgb(9, 9, 9);
-    background-color: rgb(180, 192, 193);
+    background-color: #7fed63; /*(180, 192, 193);*/
     font-size: 0.7rem;
     display: flex;
     justify-content: center;
@@ -255,7 +265,3 @@ input[type="checkbox"]:checked::before {
 .delete-task-btn:hover {
     background-color: rgb(157, 173, 175);
 } */
-
-
-
-
