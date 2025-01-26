@@ -1,0 +1,255 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.search-container {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    width: 79%;
+    height: 40px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #f9f9f9;
+}
+
+.search-icon {
+    margin: 0 10px;
+    font-size: 1.2em;
+    color: #888;
+}
+
+.search-box {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 1em;
+    background: none;
+}
+
+.items-container {
+    margin-top: 30px;
+    width: 80%;
+}
+
+.category {
+    margin-bottom: 20px;
+}
+
+.category h3 {
+    margin: 10px 0;
+    color: #333;
+}
+
+.item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.search-item {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border: none;
+    font-size: 0.9em;
+    text-align: left;
+}
+
+
+/* to-do css */
+
+/* :root{
+    --gradient: red;
+    
+}
+
+
+
+body{
+    margin: 0;
+    height: 100vh;
+    background-color: rgb(86, 76, 76);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.todo{
+    background-color: white;
+    height: 50%;
+    width: 60%;
+    border-radius: 2rem;
+    padding: 3rem;
+    background-color: rgba(6, 6, 6, );
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+} */
+
+.btn{
+    height: 1.5rem;
+    width: 3rem;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    background-color: rgb(180, 192, 193);
+    border: none;
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    top: 0.35rem;
+    cursor: pointer;
+}
+
+h2{
+    text-transform: uppercase;
+    height: 3rem;
+    color: rgb(163, 49, 68);
+    text-align: center;
+}
+
+.input{
+    position: relative;
+    display: flex;
+}
+
+.input-field{
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 0.9em;
+    text-align: left;
+}
+
+input[type="text"]::placeholder {
+    color: gray;
+}
+
+.todo-container{
+    display: flex;
+    gap: 1rem;
+}
+
+ul{
+    padding: 0;
+    margin: 0;
+    /* overflow-y: scroll; */
+}
+
+li{
+   display: flex;
+   flex-direction: column;
+   /* gap: 1.2rem; */
+   padding: 0.7rem;
+ 
+}
+
+#todoList p {
+    display: flex;
+    gap: 1rem;
+    color: rgb(17, 16, 16);
+    align-items: center;
+}
+
+#todoList .disabled {
+    color: gray;
+}
+
+.disabled {
+    display: flex;
+    text-decoration: line-through;
+}
+input[type="checkbox"]{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+input[type="checkbox"]::before {
+    content: "\2713";
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    font-size: 1.7rem;
+    text-align: center;
+    border: 0.06rem solid gray;
+    border-radius: 50%;
+    color: transparent;
+}
+
+input[type="checkbox"]:checked::before {
+    border: 0.06rem solid gray;
+    border-radius: 50%;
+    color: rgb(9, 9, 9);
+    background-color: rgb(180, 192, 193);
+    font-size: 0.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.counter-container {
+    height: 2rem;
+    display: flex;
+    justify-content: space-between;
+    column-count: gray;
+}
+
+.counter-container p{
+    align-self: center;
+}
+
+.counter-container button{
+    border: none;
+    background-color: rgb(180, 192, 193);
+    cursor: pointer;
+    height: 2rem;
+    width: 5.1rem;
+    font-size: 0.9rem;
+    border-radius: 5px;
+}
+
+/* .todo-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 0;
+} */
+
+.todo-container {
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    margin: 2px 0;
+    padding: 2px; /* Add padding for spacing inside the border */
+    border: 1px solid rgb(180, 192, 193); /* Add a border */
+    border-radius: 5px; /* Optional: Round the edges */
+    background-color: #ffffff; /* Optional: Add a background color */
+}
+
+.delete-task-btn {
+    height: 1.5rem;
+    width: 3.5rem;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    background-color: rgb(180, 192, 193);
+    border: none;
+}
+
+.delete-task-btn:hover {
+    background-color: rgb(157, 173, 175);
+}
+
+
+
+
