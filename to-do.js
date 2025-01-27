@@ -201,6 +201,90 @@ function createCategory(categoryName) {
     displayTasks(categoryName, todoList);
 }
 
+// Event listener for category creation
+document.addEventListener("DOMContentLoaded", () => {
+    const categoryInput = document.querySelector("#new-category-input");
+    const addCategoryButton = document.querySelector("#add-category-btn");
+
+    // Trigger category creation on button click
+    addCategoryButton.addEventListener("click", () => {
+        const categoryName = categoryInput.value.trim();
+        if (categoryName) {
+            createCategory(categoryName);
+            categoryInput.value = ""; // Clear the input field
+        }
+    });
+
+    // Trigger category creation on Enter key press
+    categoryInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            const categoryName = categoryInput.value.trim();
+            if (categoryName) {
+                createCategory(categoryName);
+                categoryInput.value = ""; // Clear the input field
+            }
+        }
+    });
+});
+document.addEventListener("DOMContentLoaded", () => {
+    // Add event listener to all search-title elements
+    document.addEventListener("click", (event) => {
+        if (event.target.classList.contains("search-title")) {
+            makeTitleEditable(event.target);
+        }
+    });
+});
+
+// Function to make the search-title editable
+function makeTitleEditable(titleElement) {
+    const originalText = titleElement.textContent.trim();
+
+     // Create an input element for editing
+     const input = document.createElement("input");
+     input.type = "text";
+     input.value = originalText;
+     input.className = "edit-title-input";
+
+     // Match the input field's dimensions and styles to the title
+     const computedStyle = getComputedStyle(titleElement);
+     input.style.width = "30%" ; // Match the title's width
+     input.style.height = `${titleElement.offsetHeight}px`; // Match the title's height
+     input.style.fontSize = computedStyle.fontSize; // Match the font size
+     input.style.fontWeight = computedStyle.fontWeight; // Match the font weight
+     input.style.border = "1px solid yellow"; // Add a yellow border
+     input.style.padding = computedStyle.padding; // Match padding
+     input.style.margin = computedStyle.margin; // Match margin
+     input.style.boxSizing = "border-box"; // Ensure padding doesn't increase size
+
+    // Replace the title element with the input field
+    titleElement.replaceWith(input);
+    input.focus();
+
+    // Save changes when Enter is pressed or input loses focus
+    input.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            saveTitleEdit(input);
+        }
+    });
+
+    input.addEventListener("blur", () => {
+        saveTitleEdit(input);
+    });
+}
+
+// Function to save the edited title
+function saveTitleEdit(input) {
+    const newText = input.value.trim() || "Untitled"; // Default to "Untitled" if input is empty
+
+    // Create a new title element
+    const updatedTitle = document.createElement("h3");
+    updatedTitle.className = "search-title";
+    updatedTitle.textContent = newText;
+
+    // Replace the input with the updated title
+    input.replaceWith(updatedTitle);
+}
+
 // adding drag and drop
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -251,6 +335,58 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// function for dark mode and the dark mode text 
+document.addEventListener("DOMContentLoaded", () => {
+    const toggleSwitch = document.getElementById("dark-mode-toggle");
+    const body = document.body;
+    const darkModeText = document.querySelector(".dark-mode-text");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
+    // Function to update the dark-mode-text color based on the current mode
+    function updateDarkModeTextColor() {
+        if (body.classList.contains("dark-mode")) {
+            // If dark mode is enabled, set the text color to white
+            darkModeText.style.color = "#f0f0f0"; // Light color text for dark mode
+        } else {
+            // If light mode is enabled, set the text color to black
+            darkModeText.style.color = "#000"; // Dark color text for light mode
+        }
+    }
+
+    // Set the body theme based on system preference on initial load
+    if (prefersDarkScheme.matches) {
+        body.classList.add("dark-mode");
+        toggleSwitch.checked = true; // Make the switch "on" if system is dark mode
+    }
+
+    // Update the text color based on the initial theme
+    updateDarkModeTextColor();
+
+    // Listen for system theme changes and update body class and text color
+    prefersDarkScheme.addEventListener("change", (e) => {
+        if (e.matches) {
+            // System switched to dark mode
+            body.classList.add("dark-mode");
+            toggleSwitch.checked = true;
+        } else {
+            // System switched to light mode
+            body.classList.remove("dark-mode");
+            toggleSwitch.checked = false;
+        }
+        updateDarkModeTextColor(); // Update the text color on system theme change
+    });
+
+    // Listen for changes on the toggle switch
+    toggleSwitch.addEventListener("change", function() {
+        if (this.checked) {
+            // Enable dark mode
+            body.classList.add("dark-mode");
+        } else {
+            // Disable dark mode
+            body.classList.remove("dark-mode");
+        }
+        updateDarkModeTextColor(); // Update the text color when switch is toggled
+    });
+});
 
 

@@ -7,7 +7,11 @@ body {
     align-items: center;
     position: relative;
 }
-
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #333;
+    color: #f0f0f0;
+}
 .search-container {
     margin-top: 50px;
     display: flex;
@@ -20,6 +24,9 @@ body {
     background-color: #f9f9f9;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
+/* body.dark-mode .search-container{
+    background-color: #555;
+} */
 
 .search-icon {
     margin: 0 10px;
@@ -74,7 +81,6 @@ body {
     color: #555; /* Neutral text color */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
 }
-
 /* to-do css */
 
 /* :root{
@@ -129,6 +135,9 @@ h2{
     position: relative;
     display: flex;
 }
+/* body.dark-mode input{
+    background-color: #555;
+} */
 
 .input-field{
     width: 100%;
@@ -278,7 +287,7 @@ input[type="checkbox"]:checked::before {
     border: 1px solid #ccc;
     border-radius: 4px;
     height: 3.5rem;
-    width: 72%;
+    width: 65%;
     
 }
 
@@ -311,3 +320,80 @@ input[type="checkbox"]:checked::before {
 }
 
 
+/* css for toggle switch */
+
+
+/* Add the toggle button to the bottom right corner */
+.toggle-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000; /* Ensure it stays above other elements */
+    display: flex;
+    align-items: center; /* Align the text and switch vertically */
+}
+/* From Uiverse.io by TimTrayler */ 
+.switch {
+    --secondary-container: #3a4b39;
+    --primary: #84da89;
+    margin-left: 10px;
+    font-size: 17px;
+    position: relative;
+    display: inline-block;
+    width: 3.7em;
+    height: 1.8em;
+   }
+   
+   .switch input {
+    display: none;
+    opacity: 0;
+    width: 0;
+    height: 0;
+   }
+   
+   .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #313033;
+    transition: .2s;
+    border-radius: 30px;
+   }
+   
+   .slider:before {
+    position: absolute;
+    content: "";
+    height: 1.4em;
+    width: 1.4em;
+    border-radius: 20px;
+    left: 0.2em;
+    bottom: 0.2em;
+    background-color: #aeaaae;
+    transition: .4s;
+   }
+   
+   input:checked + .slider::before {
+    background-color: var(--primary);
+   }
+   
+   input:checked + .slider {
+    background-color: var(--secondary-container);
+   }
+   
+   input:focus + .slider {
+    box-shadow: 0 0 1px var(--secondary-container);
+   }
+   
+   input:checked + .slider:before {
+    transform: translateX(1.9em);
+   }
+   
+   /* Style for the text (Dark Mode) */
+   .dark-mode-text {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
