@@ -12,15 +12,35 @@
         <input type="text" class="search-box" placeholder="Search here...">
     </div>
 
-    <!-- Add the missing class to categories container -->
-    <div class="categories-container">
-        <!-- Categories will be dynamically added here -->
-    </div>
-
-    <div class="add-category-box">
-        <input type="text" id="new-category-name" placeholder="Enter category name" />
+    <div class="add-category-container">
+        <input type="text" id="new-category-input" placeholder="Name your list" />
         <button id="add-category-btn">+</button>
-    </div>  
+    </div>
+    
+    <div class="items-container">
+        <div class="category" data-category="documents">
+            <h3 class="search-title">Documents</h3>
+                <div class="search-item ">
+                    <section class="todo">
+                    <!-- <h2>Items</h2> -->
+                    <div class="input">
+                        <input type="text" class="input-field" id="todoInput" placeholder="Add an item"/>
+                        <button class="btn">+</button>
+                    </div>
+                    <ul class="scroll">
+                        <li id="todoList"></li>
+                    </ul>
+                    <div>
+                        <hr class="counter" />
+                        <div class="counter-container">
+                            <!-- <p><span>0</span>Total Items</p> -->
+                            <button id="deleteButton" class="delete-all-btn">Delete All</button>
+                        </div> 
+                    </div>
+                   </section>
+                </div>
+        </div>
+    </div>
 
     <script src="search.js"></script>
     <script src="to-do.js"></script>
