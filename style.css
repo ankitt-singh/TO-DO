@@ -1,24 +1,29 @@
+/* General body styling */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 100vh;
     position: relative;
+    background-color: #f5f5f5;
+    padding: 20px; /* Add padding for overall spacing */
 }
 
+/* Search bar container styling */
 .search-container {
-    margin-top: 50px;
     display: flex;
     align-items: center;
-    width: 70%;
+    width: 90%;
+    max-width: 600px; /* Limit the max width */
     height: 50px;
     border: 2px solid #ccc;
     border-radius: 25px;
     padding: 0 15px;
     background-color: #f9f9f9;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-bottom: 20px; /* Add gap between search bar and categories */
 }
 
 .search-icon {
@@ -35,102 +40,46 @@ body {
     background: none;
 }
 
-.items-container {
-    margin-top: 30px;
-    width: 80%;
+/* Categories container styling */
+.categories-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+    gap: 20px; /* Gap between category boxes */
+    width: 90%;
+    max-width: 1200px; /* Limit the max width */
+    margin-bottom: 20px; /* Add gap at the bottom */
 }
 
+/* Individual category styling */
 .category {
     background: #ffffff;
     border-radius: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    padding: 15px; /* Add padding inside the box */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .category h3 {
     margin: 10px 0;
-    margin-left: 10px;
     color: #444; /* Slightly darker heading color */
     font-size: 1.1em;
     font-weight: 600;
 }
 
-.item-list {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
 .search-item {
-    padding: 30px 15px;
+    padding: 15px;
     border: 1px solid #dfe3e6; /* Light border color */
     border-radius: 5px;
-    font-size: 0.9em;
-    text-align: left;
-    background-color: #ffffff; /* White background for items */
-    color: #555; /* Neutral text color */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+    background-color: #ffffff;
+    color: #555;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle shadow */
 }
 
-/* to-do css */
-
-/* :root{
-    --gradient: red;
-    
-}
-
-body{
-    margin: 0;
-    height: 100vh;
-    background-color: rgb(86, 76, 76);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.todo{
-    background-color: white;
-    height: 50%;
-    width: 60%;
-    border-radius: 2rem;
-    padding: 3rem;
-    background-color: rgba(6, 6, 6, );
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-} */
-
-.btn{
-    height: 2 rem;
-    width: 3rem;
-    font-size: 0.9rem;
-    border-radius: 5px;
-    background-color: rgb(180, 192, 193);
-    border: none;
-    position: absolute;
-    right: 0.5rem;
-    bottom: 0.5rem;
-    top: 0.35rem;
-    cursor: pointer;
-}
-
-h2{
-    text-transform: uppercase;
-    height: 3rem;
-    color: rgb(163, 49, 68);
-    text-align: center;
-}
-
-.input{
-    position: relative;
-    display: flex;
-}
-
-.input-field{
+/* To-Do container styling */
+.input-field {
     width: 100%;
     padding: 10px 15px;
     border: 1px solid #ccc;
@@ -140,128 +89,89 @@ h2{
     text-align: left;
 }
 
-input[type="text"]::placeholder {
-    color: gray;
-}
-
-.todo-container{
-    display: flex;
-    gap: 1rem;
-}
-
-ul{
-    padding: 0;
-    margin: 0;
-    /* overflow-y: scroll; */
-}
-
-li{
-   display: flex;
-   flex-direction: column;
-   /* gap: 1.2rem; */
-   padding: 0.7rem;
- 
-}
-
-#todoList p {
-    display: flex;
-    gap: 1rem;
-    color: rgb(17, 16, 16);
-    align-items: center;
-}
-
-#todoList .disabled {
-    color: gray;
-}
-
-.disabled {
-    display: flex;
-    text-decoration: line-through;
-}
-input[type="checkbox"]{
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    cursor: pointer;
-}
-
-input[type="checkbox"]::before {
-    content: "\2713";
-    display: inline-block;
-    width: 1rem;
-    height: 1rem;
-    font-size: 1.7rem;
-    text-align: center;
-    border: 0.06rem solid gray;
-    border-radius: 50%;
-    color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-input[type="checkbox"]:checked::before {
-    border: 0.06rem solid gray;
-    border-radius: 50%;
-    color: rgb(9, 9, 9);
-    background-color: #7fed63; /*(180, 192, 193);*/
-    font-size: 0.7rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.counter-container {
-    height: 1rem;
-    display: flex;
-    justify-content: space-between;
-    column-count: gray;
-}
-
-.counter-container p{
-    align-self: center;
-}
-
-.counter-container button{
-    border: none;
-    background-color: rgb(180, 192, 193);
-    cursor: pointer;
-    height: 2rem;
-    width: 5.1rem;
-    font-size: 0.9rem;
-    border-radius: 5px;
-}
-
-/* .todo-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 5px 0;
-} */
-
 .todo-container {
     display: flex;
     align-items: center;
-    justify-content:left;
     height: 2rem;
-    margin: 2px 0;
-    padding: 2px; /* Add padding for spacing inside the border */
-    border: 1px solid rgb(180, 192, 193); /* Add a border */
-    border-radius: 5px; /* Optional: Round the edges */
-    background-color: #ffffff; /* Optional: Add a background color */
-}
-
-/* .delete-task-btn {
-    height: 1.5rem;
-    width: 3.5rem;
-    font-size: 0.9rem;
+    margin: 5px 0;
+    padding: 5px;
+    border: 1px solid rgb(180, 192, 193);
     border-radius: 5px;
-    background-color: rgb(180, 192, 193);
-    border: none;
-    position: absolute;
-    right: 6rem;
+    background-color: #ffffff;
 }
 
-.delete-task-btn:hover {
-    background-color: rgb(157, 173, 175);
-} */
+/* Add category box styling */
+.add-category-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    max-width: 600px;
+    width: 90%;
+}
+
+.add-category-box input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+    margin-right: 10px;
+}
+
+.add-category-box button {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-category-box button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .categories-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Smaller grid for mobile */
+        gap: 15px;
+    }
+
+    .category {
+        padding: 10px;
+    }
+
+    .search-container {
+        width: 95%; /* Adjust search bar width */
+    }
+
+    .add-category-box {
+        flex-direction: column; /* Stack input and button */
+        align-items: stretch;
+    }
+
+    .add-category-box input[type="text"] {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .categories-container {
+        grid-template-columns: 1fr; /* Single column for very small screens */
+    }
+
+    .search-container {
+        height: 45px; /* Adjust height for smaller screens */
+    }
+}

@@ -1,34 +1,84 @@
-// Initialize a map to store todos for each category
+// Initialize an empty map for categories and their todos
 const todoMap = {};
 
-// Add event listeners to all categories
+// Add event listener to the "Add Category" button
 document.addEventListener("DOMContentLoaded", () => {
-    const categories = document.querySelectorAll(".category");
+    const addCategoryInput = document.querySelector("#new-category-name");
+    const addCategoryButton = document.querySelector("#add-category-btn");
+    const categoriesContainer = document.querySelector(".categories-container");
 
-    categories.forEach((category) => {
-        const categoryName = category.dataset.category;
-        const inputField = category.querySelector(".input-field");
-        const addButton = category.querySelector(".btn");
-        const deleteAllButton = category.querySelector(".delete-all-btn");
-        const todoList = category.querySelector(".scroll");
+    // Add event listener for creating a new category
+    addCategoryButton.addEventListener("click", () => {
+        createNewCategory(addCategoryInput.value.trim(), categoriesContainer);
+    });
 
-        // Initialize todos for this category
-        todoMap[categoryName] = JSON.parse(localStorage.getItem(categoryName)) || [];
-
-        // Add listeners
-        addButton.addEventListener("click", () => addTask(categoryName, inputField, todoList));
-        inputField.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
-                addTask(categoryName, inputField, todoList);
-            }
-        });
-        deleteAllButton.addEventListener("click", () => deleteAllTasks(categoryName, todoList));
-
-        // Display existing tasks
-        displayTasks(categoryName, todoList);
+    // Allow pressing "Enter" to create a category
+    addCategoryInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            createNewCategory(addCategoryInput.value.trim(), categoriesContainer);
+        }
     });
 });
 
+// Function to create a new category
+function createNewCategory(categoryName, container) {
+    if (!categoryName) return; // Do nothing if the input is empty
+    if (todoMap[categoryName]) {
+        alert("This category already exists!");
+        return;
+    }
+
+    // Create a new category in the map
+    todoMap[categoryName] = [];
+
+    // Create the category box
+    const categoryBox = document.createElement("div");
+    categoryBox.className = "category";
+    categoryBox.dataset.category = categoryName;
+
+    categoryBox.innerHTML = `
+        <h3 class="search-title">${categoryName}</h3>
+        <div class="search-item">
+            <section class="todo">
+                <div class="input">
+                    <input type="text" class="input-field" placeholder="Add an item" />
+                    <button class="btn">+</button>
+                </div>
+                <ul class="scroll"></ul>
+                <div>
+                    <hr class="counter" />
+                    <div class="counter-container">
+                        <button class="delete-all-btn">Delete All</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    `;
+
+    container.appendChild(categoryBox);
+
+    // Add functionality to the category's buttons and inputs
+    initializeCategory(categoryBox, categoryName);
+}
+
+// Initialize the functionality for a category
+function initializeCategory(categoryElement, categoryName) {
+    const inputField = categoryElement.querySelector(".input-field");
+    const addButton = categoryElement.querySelector(".btn");
+    const deleteAllButton = categoryElement.querySelector(".delete-all-btn");
+    const todoList = categoryElement.querySelector(".scroll");
+
+    // Add event listeners for the input and buttons
+    addButton.addEventListener("click", () => addTask(categoryName, inputField, todoList));
+    inputField.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            addTask(categoryName, inputField, todoList);
+        }
+    });
+    deleteAllButton.addEventListener("click", () => deleteAllTasks(categoryName, todoList));
+}
+
+// Add a new task to a category
 function addTask(categoryName, inputField, todoList) {
     const newTask = inputField.value.trim();
     if (newTask !== "") {
@@ -42,12 +92,7 @@ function addTask(categoryName, inputField, todoList) {
     }
 }
 
-function deleteAllTasks(categoryName, todoList) {
-    todoMap[categoryName] = [];
-    saveToLocalStorage(categoryName);
-    displayTasks(categoryName, todoList);
-}
-
+// Display all tasks in a category
 function displayTasks(categoryName, todoList) {
     todoList.innerHTML = "";
     todoMap[categoryName].forEach((item, index) => {
@@ -74,48 +119,48 @@ function displayTasks(categoryName, todoList) {
     });
 }
 
-
-function editTask(categoryName, index, todoList) {
-    const todoItem = document.getElementById(`todo-${categoryName}-${index}`); // Get the task element
-    const existingText = todoMap[categoryName][index].task; // Get the task text from the correct category
-    const inputElement = document.createElement("input"); // Create an input element
-
-    inputElement.value = existingText; // Set the current task text in the input
-    inputElement.className = "edit-input"; // Optional: Add a class for styling
-    todoItem.replaceWith(inputElement); // Replace the task text with the input
-    inputElement.focus(); // Focus the input for editing
-
-    // Handle when the user finishes editing (on blur)
-    inputElement.addEventListener("blur", function () {
-        const updatedText = inputElement.value.trim(); // Get the updated text
-        if (updatedText) {
-            todoMap[categoryName][index].task = updatedText; // Update the task in the map
-            saveToLocalStorage(categoryName); // Save changes to localStorage
-        }
-        displayTasks(categoryName, todoList); // Re-render the task list
-    });
-
-    // Handle "Enter" key to save and exit editing mode
-    inputElement.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
-            inputElement.blur(); // Trigger the blur event to save changes
-        }
-    });
+// Delete all tasks in a category
+function deleteAllTasks(categoryName, todoList) {
+    todoMap[categoryName] = [];
+    saveToLocalStorage(categoryName);
+    displayTasks(categoryName, todoList);
 }
 
-
+// Toggle task completion
 function toggleTask(categoryName, index, todoList) {
     todoMap[categoryName][index].disabled = !todoMap[categoryName][index].disabled;
     saveToLocalStorage(categoryName);
     displayTasks(categoryName, todoList);
 }
 
-// function deleteTask(categoryName, index, todoList) {
-//     todoMap[categoryName].splice(index, 1);
-//     saveToLocalStorage(categoryName);
-//     displayTasks(categoryName, todoList);
-// }
+// Edit a task
+function editTask(categoryName, index, todoList) {
+    const todoItem = document.getElementById(`todo-${categoryName}-${index}`);
+    const existingText = todoMap[categoryName][index].task;
+    const inputElement = document.createElement("input");
 
+    inputElement.value = existingText;
+    inputElement.className = "edit-input";
+    todoItem.replaceWith(inputElement);
+    inputElement.focus();
+
+    inputElement.addEventListener("blur", function () {
+        const updatedText = inputElement.value.trim();
+        if (updatedText) {
+            todoMap[categoryName][index].task = updatedText;
+            saveToLocalStorage(categoryName);
+        }
+        displayTasks(categoryName, todoList);
+    });
+
+    inputElement.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            inputElement.blur();
+        }
+    });
+}
+
+// Save to localStorage
 function saveToLocalStorage(categoryName) {
     localStorage.setItem(categoryName, JSON.stringify(todoMap[categoryName]));
 }
