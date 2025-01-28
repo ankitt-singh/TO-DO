@@ -11,36 +11,18 @@
         <span class="search-icon">&#128269;</span> <!-- Unicode for search icon -->
         <input type="text" class="search-box" placeholder="Search here...">
     </div>
+    
+    <div class="items-container">
+        
+    </div>
+
+    <!-- add list -->
 
     <div class="add-category-container">
-        <input type="text" id="new-category-input" placeholder="Add your list" />
+        <input type="text" id="new-category-input" placeholder="+" />
         <button id="add-category-btn">+</button>
     </div>
     
-    <div class="items-container">
-        <div class="category" data-category="documents">
-            <h3 class="search-title">Documents</h3>
-                <div class="search-item ">
-                    <section class="todo">
-                    <!-- <h2>Items</h2> -->
-                    <div class="input">
-                        <input type="text" class="input-field" id="todoInput" placeholder="Add an item"/>
-                        <button class="btn">+</button>
-                    </div>
-                    <ul class="scroll">
-                        <li id="todoList"></li>
-                    </ul>
-                    <div>
-                        <hr class="counter" />
-                        <div class="counter-container">
-                            <!-- <p><span>0</span>Total Items</p> -->
-                            <button id="deleteButton" class="delete-all-btn">Delete All</button>
-                        </div> 
-                    </div>
-                   </section>
-                </div>
-        </div>
-    </div>
     <div class="toggle-container">
         <span class="dark-mode-text">Dark Mode</span>
         <label class="switch">
