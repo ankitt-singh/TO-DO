@@ -76,32 +76,43 @@ function displayTasks(categoryName, todoList) {
 
 
 function editTask(categoryName, index, todoList) {
-    const todoItem = document.getElementById(`todo-${categoryName}-${index}`); // Get the task element
-    const existingText = todoMap[categoryName][index].task; // Get the task text from the correct category
-    const inputElement = document.createElement("input"); // Create an input element
+    const todoItem = document.getElementById(`todo-${categoryName}-${index}`);
 
-    inputElement.value = existingText; // Set the current task text in the input
-    inputElement.className = "edit-input"; // Optional: Add a class for styling
-    todoItem.replaceWith(inputElement); // Replace the task text with the input
-    inputElement.focus(); // Focus the input for editing
+    // Make the <p> element editable instead of replacing it
+    todoItem.setAttribute("contenteditable", "true");
+    todoItem.style.outline = "none"; // Remove default outline
+    todoItem.style.borderBottom = "1px solid yellow"; // Optional visual cue
 
-    // Handle when the user finishes editing (on blur)
-    inputElement.addEventListener("blur", function () {
-        const updatedText = inputElement.value.trim(); // Get the updated text
-        if (updatedText) {
-            todoMap[categoryName][index].task = updatedText; // Update the task in the map
-            saveToLocalStorage(categoryName); // Save changes to localStorage
-        }
-        displayTasks(categoryName, todoList); // Re-render the task list
-    });
+    todoItem.focus(); // Automatically focus for editing
 
-    // Handle "Enter" key to save and exit editing mode
-    inputElement.addEventListener("keydown", function (event) {
+    // Save when Enter is pressed or loses focus
+    todoItem.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
-            inputElement.blur(); // Trigger the blur event to save changes
+            event.preventDefault(); // Prevent new line
+            todoItem.removeAttribute("contenteditable");
+            todoItem.style.borderBottom = "none"; // Remove border
+            updateTask(categoryName, index, todoItem.textContent.trim());
         }
     });
+
+    todoItem.addEventListener("blur", () => {
+        todoItem.removeAttribute("contenteditable");
+        todoItem.style.borderBottom = "none";
+        updateTask(categoryName, index, todoItem.textContent.trim());
+    });
+
+    input.style.width = `${input.value.length + 2}ch`; // Adjust input width based on text length
+
 }
+
+// Function to update the task in local storage
+function updateTask(categoryName, index, newText) {
+    if (newText) {
+        todoMap[categoryName][index].task = newText;
+        saveToLocalStorage(categoryName);
+    }
+}
+
 
 
 function toggleTask(categoryName, index, todoList) {
@@ -245,38 +256,29 @@ document.addEventListener("DOMContentLoaded", () => {
 function makeTitleEditable(titleElement) {
     const originalText = titleElement.textContent.trim();
 
-     // Create an input element for editing
-     const input = document.createElement("input");
-     input.type = "text";
-     input.value = originalText;
-     input.className = "edit-title-input";
+    // Use `contenteditable` instead of replacing with an input field
+    titleElement.setAttribute("contenteditable", "true");
+    titleElement.style.outline = "none"; // Remove focus outline
+    titleElement.style.borderBottom = "1px solid yellow"; // Optional visual cue
 
-     // Match the input field's dimensions and styles to the title
-     const computedStyle = getComputedStyle(titleElement);
-     input.style.width = "30%" ; // Match the title's width
-     input.style.height = `${titleElement.offsetHeight}px`; // Match the title's height
-     input.style.fontSize = computedStyle.fontSize; // Match the font size
-     input.style.fontWeight = computedStyle.fontWeight; // Match the font weight
-     input.style.border = "1px solid yellow"; // Add a yellow border
-     input.style.padding = computedStyle.padding; // Match padding
-     input.style.margin = computedStyle.margin; // Match margin
-     input.style.boxSizing = "border-box"; // Ensure padding doesn't increase size
+    titleElement.focus(); // Automatically focus on the text
 
-    // Replace the title element with the input field
-    titleElement.replaceWith(input);
-    input.focus();
-
-    // Save changes when Enter is pressed or input loses focus
-    input.addEventListener("keydown", (event) => {
+    // Save changes when Enter is pressed or loses focus
+    titleElement.addEventListener("keydown", (event) => {
         if (event.key === "Enter") {
-            saveTitleEdit(input);
+            event.preventDefault(); // Prevent new line
+            titleElement.removeAttribute("contenteditable");
+            titleElement.style.borderBottom = "none"; // Remove border
         }
     });
 
-    input.addEventListener("blur", () => {
-        saveTitleEdit(input);
+    titleElement.addEventListener("blur", () => {
+        titleElement.removeAttribute("contenteditable");
+        titleElement.style.borderBottom = "none";
     });
+    
 }
+
 
 // Function to save the edited title
 function saveTitleEdit(input) {

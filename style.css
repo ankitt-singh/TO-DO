@@ -278,6 +278,17 @@ input[type="checkbox"]:checked::before {
     margin: 5px 0;
 } */
 
+/* for handling long text in task bar */
+
+/* .todo-container p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%; 
+} */
+
+
+
 .todo-container {
     display: flex;
     align-items: center;
