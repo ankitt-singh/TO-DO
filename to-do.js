@@ -161,8 +161,9 @@ function createCategory(categoryName) {
     categoryDiv.setAttribute("draggable", "true");
 
     categoryDiv.innerHTML = `
+    <div class="search-item">
+    <button class="delete-category-btn">Delete</button>
         <h3 class="search-title">${categoryName}</h3>
-        <div class="search-item">
             <section class="todo">
                 <div class="input">
                     <input type="text" class="input-field" placeholder="Add an item" />
@@ -172,7 +173,7 @@ function createCategory(categoryName) {
                 <div>
                     <hr class="counter" />
                     <div class="counter-container">
-                        <button class="delete-all-btn">Delete All</button>
+                         <!--<button class="delete-all-btn">Delete All</button>-->
                     </div>
                 </div>
             </section>
@@ -180,13 +181,14 @@ function createCategory(categoryName) {
     `;
 
     // Append the new category to the items container
-    itemsContainer.appendChild(categoryDiv);
+    itemsContainer.prepend(categoryDiv);
+
 
     // Initialize the new category in todoMap and add functionality
     todoMap[categoryName] = [];
     const inputField = categoryDiv.querySelector(".input-field");
     const addButton = categoryDiv.querySelector(".btn");
-    const deleteAllButton = categoryDiv.querySelector(".delete-all-btn");
+    // const deleteAllButton = categoryDiv.querySelector(".delete-all-btn");
     const todoList = categoryDiv.querySelector(".scroll");
 
     addButton.addEventListener("click", () => addTask(categoryName, inputField, todoList));
@@ -195,10 +197,14 @@ function createCategory(categoryName) {
             addTask(categoryName, inputField, todoList);
         }
     });
-    deleteAllButton.addEventListener("click", () => deleteAllTasks(categoryName, todoList));
+    // deleteAllButton.addEventListener("click", () => deleteAllTasks(categoryName, todoList));
 
     // Display tasks (if any) for the new category
     displayTasks(categoryName, todoList);
+
+    // Add delete functionality
+    const deleteButton = categoryDiv.querySelector(".delete-category-btn");
+    deleteButton.addEventListener("click", () => deleteCategory(categoryName, categoryDiv));
 }
 
 // Event listener for category creation
@@ -389,4 +395,36 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+document.getElementById("new-category-input").addEventListener("keypress", function (e) {
+    if (e.key === "Enter" && this.value.trim() !== "") {
+        // Create a new category div
+        const newCategory = document.createElement("div");
+        newCategory.className = "category";
+        newCategory.innerHTML = `<h3>${this.value.trim()}</h3>`;
 
+        // Get the container and the add-category-container
+        const container = document.querySelector(".items-container");
+        const addCategoryContainer = document.querySelector(".add-category-container");
+
+        // Insert the new category before the add-category-container
+        container.insertBefore(newCategory, addCategoryContainer);
+
+        // Move the add-category-container to the end of the container
+        container.appendChild(addCategoryContainer);
+
+        // Clear the input field
+        this.value = "";
+    }
+});
+
+// deleteCategory
+function deleteCategory(categoryName, categoryDiv) {
+    // Remove from localStorage
+    localStorage.removeItem(categoryName);
+    
+    // Remove from todoMap
+    delete todoMap[categoryName];
+
+    // Remove from DOM
+    categoryDiv.remove();
+}
