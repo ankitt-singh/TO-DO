@@ -188,6 +188,7 @@ function createCategory(categoryName) {
                     </div>
                 </div>
             </section>
+            
         </div>
     `;
 

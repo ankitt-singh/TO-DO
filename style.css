@@ -13,7 +13,7 @@ body.dark-mode {
     color: #f0f0f0;
 }
 .search-container {
-    margin-top: 20px;
+    margin-top: 30px;
     display: flex;
     align-items: center;
     width: 70%;
@@ -23,6 +23,10 @@ body.dark-mode {
     padding: 0 15px;
     background-color: #f9f9f9;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+
+    flex-shrink: 0; /* Prevent shrinking */
+    top: 30px; /* Adjust if needed */
+    z-index: 1000; /* Ensure it's above other elements */
 }
 /* body.dark-mode .search-container{
     background-color: #555;
@@ -75,7 +79,7 @@ body.dark-mode {
 .category h3 {
     margin: 10px 0;
     margin-left: 10px;
-    color: #444; /* Slightly darker heading color */
+    color: #ffffff; /* Slightly darker heading color */
     font-size: 1.1em;
     font-weight: 600;
 }
@@ -87,8 +91,11 @@ body.dark-mode {
 }
 
 .search-item {
+    background: url('gfg.gif') center/cover no-repeat;
+    /* opacity: 0.3; */
+    position: relative;
     padding: 15px;
-    border: 4px solid #f81864; /* Light border color */
+    border: 4px solid #f81864;
     border-radius: 10px;
     font-size: 0.9em;
     text-align: left;
@@ -140,13 +147,17 @@ body{
     width: 3rem;
     font-size: 0.9rem;
     border-radius: 5px;
-    background-color: rgb(180, 192, 193);
-    border: none;
+    border: 1px solid #000000;
+    background-color: rgb(255, 255, 255);
     position: absolute;
     right: 0.5rem;
     bottom: 0.5rem;
     top: 0.35rem;
     cursor: pointer;
+}
+
+.btn:hover{
+    background-color: #7fed63;
 }
 
 h2{
@@ -167,11 +178,12 @@ h2{
 .input-field{
     width: 100%;
     padding: 10px 15px;
-    border: 1px solid #ccc;
+    border: 1px solid #000000;
     border-radius: 5px;
     background-color: #f9f9f9;
     font-size: 0.9em;
     text-align: left;
+    opacity: 90%;
 }
 
 input[type="text"]::placeholder {
@@ -240,7 +252,7 @@ input[type="checkbox"]:checked::before {
     border: 0.06rem solid gray;
     border-radius: 50%;
     color: rgb(9, 9, 9);
-    background-color: #7fed63; /*(180, 192, 193);*/
+    background-color: rgb(180, 192, 193); /*(180, 192, 193);*/
     font-size: 0.7rem;
     display: flex;
     justify-content: center;
@@ -296,10 +308,10 @@ input[type="checkbox"]:checked::before {
     height: 2rem;
     margin: 2px 0;
     padding: 2px; /* Add padding for spacing inside the border */
-    border: 1px solid rgb(180, 192, 193); /* Add a border */
+    border: 1px solid rgb(0, 0, 0); /* Add a border */
     border-radius: 5px; /* Optional: Round the edges */
     background-color: #ffffff; /* Optional: Add a background color */
-    
+    opacity: 90%;   /* i have to change it */
 }
 
 .delete-category-btn{
@@ -312,10 +324,10 @@ input[type="checkbox"]:checked::before {
     border: 2px solid #000000;
   }
   .delete-category-btn:hover{
-    background: #c0392b;
+    background: #f81864;
   }
   .delete-category-btn:active{
-    background: #e74c3c;
+    background: #f81864;
   }
 
 /* .delete-task-btn {
