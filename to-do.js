@@ -154,6 +154,37 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Function to create a new category dynamically
+// Array of different background images
+const backgroundImages = [
+    "url('img1.gif')",
+    "url('img2.webp')",
+    "url('img3.webp')",
+    "url('img4.webp')",
+    "url('img5.webp')",
+    "url('img6.webp')",
+    "url('img7.gif')",
+    "url('img8.webp')"
+];
+
+let lastUsedBackground = -1; // To track the last used background index
+
+// Function to assign a random background (different from the last one)
+function assignRandomBackground(categoryDiv) {
+    let randomIndex;
+    do {
+        randomIndex = Math.floor(Math.random() * backgroundImages.length);
+    } while (randomIndex === lastUsedBackground); // Ensure it's different from the last used one
+    lastUsedBackground = randomIndex; // Update the last used background index
+
+    // Set the background image for the category
+    const searchItem = categoryDiv.querySelector(".search-item");
+    searchItem.style.backgroundImage = backgroundImages[randomIndex];
+    searchItem.style.backgroundSize = "cover";
+    searchItem.style.backgroundPosition = "center";
+    searchItem.style.backgroundRepeat = "no-repeat";
+}
+
+// Use this function to create a category (same as your existing function)
 function createCategory(categoryName) {
     const itemsContainer = document.querySelector(".items-container");
 
@@ -192,15 +223,16 @@ function createCategory(categoryName) {
         </div>
     `;
 
+    // Assign a random background
+    assignRandomBackground(categoryDiv);
+
     // Append the new category to the items container
     itemsContainer.prepend(categoryDiv);
-
 
     // Initialize the new category in todoMap and add functionality
     todoMap[categoryName] = [];
     const inputField = categoryDiv.querySelector(".input-field");
     const addButton = categoryDiv.querySelector(".btn");
-    // const deleteAllButton = categoryDiv.querySelector(".delete-all-btn");
     const todoList = categoryDiv.querySelector(".scroll");
 
     addButton.addEventListener("click", () => addTask(categoryName, inputField, todoList));
@@ -209,7 +241,6 @@ function createCategory(categoryName) {
             addTask(categoryName, inputField, todoList);
         }
     });
-    // deleteAllButton.addEventListener("click", () => deleteAllTasks(categoryName, todoList));
 
     // Display tasks (if any) for the new category
     displayTasks(categoryName, todoList);
@@ -218,6 +249,10 @@ function createCategory(categoryName) {
     const deleteButton = categoryDiv.querySelector(".delete-category-btn");
     deleteButton.addEventListener("click", () => deleteCategory(categoryName, categoryDiv));
 }
+
+// Add the category creation logic as is
+
+
 
 // Event listener for category creation
 document.addEventListener("DOMContentLoaded", () => {
