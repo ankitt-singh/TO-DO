@@ -59,11 +59,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-"url('img1.gif')",
-    "url('img2.webp')",
-    "url('img3.webp')",
-    "url('img4.webp')",
-    "url('img5.webp')",
-    "url('img6.webp')",
-    "url('img7.gif')",
-    "url('img8.webp')"

@@ -206,7 +206,7 @@ ul{
 
 li{
    display: flex;
-   flex-direction: column;
+   flex-direction: column; 
    /* gap: 1.2rem; */
    padding: 0.7rem;
  

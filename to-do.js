@@ -163,7 +163,7 @@ const backgroundImages = [
     "url('img5.webp')",
     "url('img6.webp')",
     "url('img7.gif')",
-    "url('img8.webp')"
+    "url('img8.webp')" 
 ];
 
 let lastUsedBackground = -1; // To track the last used background index
