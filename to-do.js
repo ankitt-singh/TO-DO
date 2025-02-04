@@ -466,3 +466,6 @@ function deleteCategory(categoryName, categoryDiv) {
     // Remove from DOM
     categoryDiv.remove();
 }
+
+
+
