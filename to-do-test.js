@@ -1,3 +1,5 @@
+//to do js 
+
 // Initialize a map to store todos for each category
 const todoMap = {};
 
@@ -28,15 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
         displayTasks(categoryName, todoList);
     });
 });
-
-// Define dropdown options for each category
-const categoryOptions = {
-    "Airline Membership": ["Delta", "American Airlines", "United", "Southwest", "JetBlue"],
-    "Hotel Membership": ["Marriott", "Hilton", "Hyatt", "InterContinental", "Best Western"],
-    "Airport Lounge Membership": ["Priority Pass", "Amex Centurion Lounge", "Delta Sky Club", "United Club", "Plaza Premium"],
-    "Credit Card Travel Membership": ["Chase Sapphire", "Amex Platinum", "Citi Prestige", "Capital One Venture", "Discover Miles"],
-    "Others": ["Custom Option 1", "Custom Option 2", "Custom Option 3"]
-};
 
 function addTask(categoryName, inputField, todoList) {
     const newTask = inputField.value.trim();
@@ -72,7 +65,7 @@ function displayTasks(categoryName, todoList) {
             </p>
         `;
 
-        const taskElement = taskContainer.querySelector(`#todo-${categoryName}-${index}`);
+        const taskElement = taskContainer.querySelector(#todo-${categoryName}-${index});
         taskElement.addEventListener("click", () => editTask(categoryName, index, todoList));
 
         taskContainer.querySelector(".todo-checkbox").addEventListener("change", () =>
@@ -85,7 +78,7 @@ function displayTasks(categoryName, todoList) {
 
 
 function editTask(categoryName, index, todoList) {
-    const todoItem = document.getElementById(`todo-${categoryName}-${index}`);
+    const todoItem = document.getElementById(todo-${categoryName}-${index});
 
     // Make the <p> element editable instead of replacing it
     todoItem.setAttribute("contenteditable", "true");
@@ -110,7 +103,7 @@ function editTask(categoryName, index, todoList) {
         updateTask(categoryName, index, todoItem.textContent.trim());
     });
 
-    input.style.width = `${input.value.length + 2}ch`; // Adjust input width based on text length
+    input.style.width = ${input.value.length + 2}ch; // Adjust input width based on text length
 
 }
 
@@ -211,38 +204,25 @@ function createCategory(categoryName) {
     // Add draggable functionality
     categoryDiv.setAttribute("draggable", "true");
 
-    // Create the dropdown for the category
-    const dropdown = document.createElement("select");
-    dropdown.className = "category-dropdown";
-
-    // Add options to the dropdown based on the category
-    categoryOptions[categoryName].forEach(option => {
-        const optionElement = document.createElement("option");
-        optionElement.value = option;
-        optionElement.textContent = option;
-        dropdown.appendChild(optionElement);
-    });
-
     categoryDiv.innerHTML = `
     <div class="search-item">
-        <button class="delete-category-btn">Delete</button>
-        <div class="search-title">
-            ${dropdown.outerHTML}
-        </div>
-        <section class="todo">
-            <div class="input">
-                <input type="text" class="input-field" placeholder="Add an item" />
-                <button class="btn"><i class="fa-solid fa-link"></i></button>
-            </div>
-            <ul class="scroll"></ul>
-            <div>
-                <hr class="counter" />
-                <div class="counter-container">
-                    <!--<button class="delete-all-btn">Delete All</button>-->
+    <button class="delete-category-btn">Delete</button>
+        <h3 class="search-title">${categoryName}</h3>
+            <section class="todo">
+                <div class="input">
+                    <input type="text" class="input-field" placeholder="Add an item" />
+                    <button class="btn">+</button>
                 </div>
-            </div>
-        </section>
-    </div>
+                <ul class="scroll"></ul>
+                <div>
+                    <hr class="counter" />
+                    <div class="counter-container">
+                         <!--<button class="delete-all-btn">Delete All</button>-->
+                    </div>
+                </div>
+            </section>
+            
+        </div>
     `;
 
     // Assign a random background
@@ -301,42 +281,41 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
-// document.addEventListener("DOMContentLoaded", () => {
-//     // Add event listener to all search-title elements
-//     document.addEventListener("click", (event) => {
-//         if (event.target.classList.contains("search-title")) {
-//             makeTitleEditable(event.target);
-//         }
-//     });
-// });
+document.addEventListener("DOMContentLoaded", () => {
+    // Add event listener to all search-title elements
+    document.addEventListener("click", (event) => {
+        if (event.target.classList.contains("search-title")) {
+            makeTitleEditable(event.target);
+        }
+    });
+});
 
 // Function to make the search-title editable
+function makeTitleEditable(titleElement) {
+    const originalText = titleElement.textContent.trim();
 
-// function makeTitleEditable(titleElement) {
-//     const originalText = titleElement.textContent.trim();
+    // Use contenteditable instead of replacing with an input field
+    titleElement.setAttribute("contenteditable", "true");
+    titleElement.style.outline = "none"; // Remove focus outline
+    titleElement.style.borderBottom = "1px solid yellow"; // Optional visual cue
 
-//     // Use `contenteditable` instead of replacing with an input field
-//     titleElement.setAttribute("contenteditable", "true");
-//     titleElement.style.outline = "none"; // Remove focus outline
-//     titleElement.style.borderBottom = "1px solid yellow"; // Optional visual cue
+    titleElement.focus(); // Automatically focus on the text
 
-//     titleElement.focus(); // Automatically focus on the text
+    // Save changes when Enter is pressed or loses focus
+    titleElement.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault(); // Prevent new line
+            titleElement.removeAttribute("contenteditable");
+            titleElement.style.borderBottom = "none"; // Remove border
+        }
+    });
 
-//     // Save changes when Enter is pressed or loses focus
-//     titleElement.addEventListener("keydown", (event) => {
-//         if (event.key === "Enter") {
-//             event.preventDefault(); // Prevent new line
-//             titleElement.removeAttribute("contenteditable");
-//             titleElement.style.borderBottom = "none"; // Remove border
-//         }
-//     });
-
-//     titleElement.addEventListener("blur", () => {
-//         titleElement.removeAttribute("contenteditable");
-//         titleElement.style.borderBottom = "none";
-//     });
+    titleElement.addEventListener("blur", () => {
+        titleElement.removeAttribute("contenteditable");
+        titleElement.style.borderBottom = "none";
+    });
     
-// }
+}
 
 
 // Function to save the edited title
@@ -461,7 +440,7 @@ document.getElementById("new-category-input").addEventListener("keypress", funct
         // Create a new category div
         const newCategory = document.createElement("div");
         newCategory.className = "category";
-        newCategory.innerHTML = `<h3>${this.value.trim()}</h3>`;
+        newCategory.innerHTML = <h3>${this.value.trim()}</h3>;
 
         // Get the container and the add-category-container
         const container = document.querySelector(".items-container");

@@ -146,19 +146,21 @@ body{
     height: 2 rem;
     width: 3rem;
     font-size: 0.9rem;
-    border-radius: 5px;
-    border: 1px solid #000000;
-    background-color: rgb(255, 255, 255);
+    /* border-radius: 5px; */
+    /* border: 1px solid #000000; */
+    /* background-color: rgb(255, 255, 255); */
     position: absolute;
     right: 0.5rem;
     bottom: 0.5rem;
     top: 0.35rem;
     cursor: pointer;
+    border: none;
+    opacity: 90%;
 }
 
-.btn:hover{
+/* .btn:hover{
     background-color: #7fed63;
-}
+} */
 
 h2{
     text-transform: uppercase;
@@ -322,7 +324,7 @@ input[type="checkbox"]:checked::before {
     border-radius: 5px;
     background: #ffffff;
     margin-left: 165px;
-    border: 2px solid #000000;
+    /* border: 2px solid #000000; */
   }
   .delete-category-btn:hover{
     background: #f81864;
@@ -372,7 +374,7 @@ input[type="checkbox"]:checked::before {
 }
 
 #new-category-input {
-    height: 40%;
+    height: 70%;
     width: 50%;
     padding: 8px;
     border: 1px solid #f81864;
@@ -492,6 +494,17 @@ input[type="checkbox"]:checked::before {
     font-size: 14px;
     font-weight: bold;
     color: #333;
+}
+.category-dropdown {
+    width: 80%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    color:black;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 /* Limit to three boxes per row on larger screens */
