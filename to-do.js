@@ -73,7 +73,7 @@ function displayTasks(categoryName, todoList) {
         `;
 
         const taskElement = taskContainer.querySelector(`#todo-${categoryName}-${index}`);
-        taskElement.addEventListener("click", () => editTask(categoryName, index, todoList));
+        // taskElement.addEventListener("click", () => editTask(categoryName, index, todoList));
 
         taskContainer.querySelector(".todo-checkbox").addEventListener("change", () =>
             toggleTask(categoryName, index, todoList)
@@ -152,14 +152,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     addCategoryButton.addEventListener("click", () => {
         const categoryName = newCategoryInput.value.trim();
-        if (categoryName !== "") {
-            // Create a new category dynamically
-            createCategory(categoryName);
-            newCategoryInput.value = ""; // Clear input field
-        } else {
-            alert("Please enter a category name.");
+        if (categoryName) {
+            if (!document.querySelector(`[data-category="${categoryName}"]`)) {
+                createCategory(categoryName);  // Ensures all categories are initialized
+            }
+            newCategoryInput.value = ""; 
         }
     });
+    
 });
 
 // Function to create a new category dynamically
@@ -410,15 +410,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
     // Function to update the dark-mode-text color based on the current mode
-    function updateDarkModeTextColor() {
-        if (body.classList.contains("dark-mode")) {
-            // If dark mode is enabled, set the text color to white
-            darkModeText.style.color = "#f0f0f0"; // Light color text for dark mode
-        } else {
-            // If light mode is enabled, set the text color to black
-            darkModeText.style.color = "#000"; // Dark color text for light mode
-        }
-    }
+    // function updateDarkModeTextColor() {
+    //     if (body.classList.contains("dark-mode")) {
+    //         // If dark mode is enabled, set the text color to white
+    //         darkModeText.style.color = "#f0f0f0"; // Light color text for dark mode
+    //     } else {
+    //         // If light mode is enabled, set the text color to black
+    //         darkModeText.style.color = "#000"; // Dark color text for light mode
+    //     }
+    // }
 
     // Set the body theme based on system preference on initial load
     if (prefersDarkScheme.matches) {
@@ -427,7 +427,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Update the text color based on the initial theme
-    updateDarkModeTextColor();
+    // updateDarkModeTextColor();
 
     // Listen for system theme changes and update body class and text color
     prefersDarkScheme.addEventListener("change", (e) => {
@@ -444,16 +444,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Listen for changes on the toggle switch
-    toggleSwitch.addEventListener("change", function() {
-        if (this.checked) {
-            // Enable dark mode
-            body.classList.add("dark-mode");
-        } else {
-            // Disable dark mode
-            body.classList.remove("dark-mode");
-        }
-        updateDarkModeTextColor(); // Update the text color when switch is toggled
-    });
+    // toggleSwitch.addEventListener("change", function() {
+    //     if (this.checked) {
+    //         // Enable dark mode
+    //         body.classList.add("dark-mode");
+    //     } else {
+    //         // Disable dark mode
+    //         body.classList.remove("dark-mode");
+    //     }
+    //     updateDarkModeTextColor(); // Update the text color when switch is toggled
+    // });
 });
 
 document.getElementById("new-category-input").addEventListener("keypress", function (e) {
@@ -489,3 +489,4 @@ function deleteCategory(categoryName, categoryDiv) {
     // Remove from DOM
     categoryDiv.remove();
 }
+console.log(todoMap);
