@@ -442,6 +442,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         updateDarkModeTextColor(); // Update the text color on system theme change
     });
+    
 
     // Listen for changes on the toggle switch
     // toggleSwitch.addEventListener("change", function() {
